@@ -22,4 +22,8 @@ print("Your full name using percent formatting is: %s %s. %s" % (first, middle_i
 print("Your full name using format method is: {} {}. {}".format(first, middle_initial, last))
 
 # Using the join() method to format the output
-print("Your full name using lst joins is:" + " ".join([first, middle_initial + ".", last]))
+print("Your full name using list joins is:" + " ".join([first, middle_initial + ".", last]))
+
+# Using the format() method but unpacking the list as the argument
+name_parts = [first, middle_initial, last]
+print("Your full name is: {} {}. {}".format(*name_parts))
