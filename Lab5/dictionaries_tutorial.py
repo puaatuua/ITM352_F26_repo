@@ -56,3 +56,25 @@ for key, value in student.items():
 # Keys can also be iterated over directly
 for key in student:
     print(f"{key}: {student[key]}")
+
+# Part 5: Nested Dictionaries
+# Create a dictionary of multiple students, each with their own information dictionary
+
+students = {
+    "student1": {
+        "name": "Ava",
+        "major": "MIS",
+        "grades": {
+            "BUS": 90,
+            "ITM": 95
+        }
+    },
+    "student2": {
+        "name": "Sadie",
+        "major": "Business",
+        "grades": {
+            "BUS": 80,
+            "ECON": 93
+        }
+    }
+}
