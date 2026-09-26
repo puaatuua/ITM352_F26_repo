@@ -1,5 +1,8 @@
 # Testing the use of assertions
 
+# Name: Ava Puaatuua
+# Date: Sept. 25, 2026
+
 def celsius_to_fahrenheit(celsius):
     assert celsius >= -273.15, "Temperature cannot be below absolute zero!"
     fahrenheit = (celsius * 9/5) + 32

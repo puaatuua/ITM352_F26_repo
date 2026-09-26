@@ -1,3 +1,8 @@
+# This program checks if a given year is a leap year or not
+
+# Name: Ava Puaatuua
+# Date: Sept. 25, 2026
+
 year = int(input("Enter a year: "))
 
 if year % 4 == 0:
