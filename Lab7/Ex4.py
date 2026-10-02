@@ -11,17 +11,17 @@ budget = 50
 
 for purchase in recent_purchases:
     if purchase > budget:
-        print("This purchase is over budget!")
+        print(f"This purchase {purchase} is over budget!")
     else:
-        print("This purchase is within budget.")
+        print(f"This purchase {purchase} is within budget.")
 
 # Create a function for this and write test cases for this and use them to test the function.
 def check_budget(purchases, budget):
     for purchase in purchases:
         if purchase > budget:
-            print("This purchase is over budget!")
+            print(f"This purchase {purchase} is over budget!")
         else:
-            print("This purchase is within budget.")
+            print(f"This purchase {purchase} is within budget.")
 
 # Test cases
 test_purchases1 = [10, 20, 30]
