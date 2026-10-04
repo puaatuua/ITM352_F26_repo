@@ -30,7 +30,9 @@ except Exception as error:
 
 try:
     user_input = input("Enter a value to append to the tuple: ")
-    data += (user_input,)
-    print("Appended tuple:", data)
-except:
-    
+    data.append(user_input)
+except AttributeError:
+    data = list(data)
+    data.append(user_input)
+
+print("Appended tuple:", data)

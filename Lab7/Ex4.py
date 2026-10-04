@@ -24,12 +24,8 @@ def check_budget(purchases, budget):
             print(f"This purchase {purchase} is within budget.")
 
 # Test cases
-test_purchases1 = [10, 20, 30]
-test_budget1 = 25
-print("\nTest Case 1:")
-check_budget(test_purchases1, test_budget1)
-
-test_purchases2 = [60, 40, 50]
-test_budget2 = 55
-print("\nTest Case 2:")
-check_budget(test_purchases2, test_budget2)
+def test_check_purcahses(list_of_purcahses, list_of_budgets):
+    for purchases, budget in zip(list_of_purcahses, list_of_budgets):
+        print(f"Testing with purchases: {purchases} and budget: {budget}")
+        check_budget(purchases, budget)
+        print()

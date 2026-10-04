@@ -14,4 +14,5 @@ if answer == "Berlin":
     print("Correct!")
 else:
     print(f"The answer is 'Berlin', not {answer!r}.")
-    
+
+# don't put data with code!
