@@ -12,6 +12,10 @@ questions = {
     "What is the capital of Germany? ": ["Berlin", "Hamburg", "Munich", "Cologne"],
     "What is the airspeed of an unladen swallow?": ["10", "12", "8", "15"],
     "What is the capital of Italy? ": ["Rome", "Milan", "Naples", "Turin"],
+    "What is the capital of Texas": ["Austin","San Antonio", "Dallas","Waco"],
+    "The Last Supper was painted by which artist": ["Da Vinci","Rembrandt","Picasso","Michelangelo"],
+
+
     }
 
 NUM_QUESTIONS_PER_QUIZ = 5
@@ -21,7 +25,7 @@ selected_questions = random.sample(list(questions.items()), k=num_questions)
 
 num_correct = 0
 
-for num, (question, answers) in enumerate(questions.items(), start=1):
+for num, (question, answers) in enumerate(selected_questions, start=1):
     correct_answer = answers[0]
     print(f"\nQuestion {num}: {question}")
 
@@ -42,4 +46,4 @@ for num, (question, answers) in enumerate(questions.items(), start=1):
     else:
         print(f"The answer is '{correct_answer!r}', not {answer!r}.")
 
-print(f"\nYou got {num_correct} out of {len(questions)} correct.")
+print(f"\nYou got {num_correct} out of {len(selected_questions)} correct.")
