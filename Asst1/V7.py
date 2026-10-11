@@ -1,3 +1,10 @@
+# Interactive quiz system, seventh version
+# Loads questions from a JSON file, randomly selects questions, displays randomized answer choices,
+# and keeps track of the user's score.
+
+# Name: Ava Puaatuua
+# Date: Oct. 9, 2026
+
 from string import ascii_lowercase
 import random
 import json
