@@ -13,10 +13,11 @@ Date: Oct. 11, 2026
 from string import ascii_lowercase # Provides a string of lowercase letters for labeling answer choices
 import random # Selects and shuffles questions and answer choices
 import json # Reads questions from questions.json file
+from datetime import datetime # Adds the date and time to the score history
 
 # Opens questions.json in read mode and loads the questions into the questions variable
-question_file = open("questions.json", "r")
-questions = json.load(question_file)
+with open("questions.json", "r") as question_file:
+    questions = json.load(question_file)
 
 # Sets the number of questions to be asked in the quiz
 NUM_QUESTIONS_PER_QUIZ = 5
@@ -40,7 +41,9 @@ def get_answer(question, alternatives):
     return labeled_answers[answer_label]
 
 # Asks a question, checks the answer, and returns 1 if correct, 0 if incorrect
-def ask_question(question, alternatives):    
+def ask_question(question, question_data):
+    alternatives = question_data["answers"]
+    explanation = question_data["explanation"]
     correct_answer = alternatives[0]
     ordered_alternatives = random.sample(alternatives, k=len(alternatives))
     answer = get_answer(question, ordered_alternatives)
@@ -48,10 +51,17 @@ def ask_question(question, alternatives):
     # Returning a score for the question, 1 for correct, 0 for incorrect
     if answer == correct_answer:
         print("Correct!")
-        return 1
     else:
         print(f"The answer is '{correct_answer!r}', not {answer!r}.")
-        return 0
+
+    print(f"Explanation: {explanation}")
+    return int(answer == correct_answer)
+
+def save_score(score, total_questions):
+    #Append the completed quiz score to the score history file.
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open("score_history.txt", "a") as score_file:
+        score_file.write(f"{timestamp} - {score}/{total_questions} correct\n")
 
 
 # Main program logic starts here
@@ -67,3 +77,4 @@ for num, (question, answers) in enumerate(questions, start=1):
 
 # Print the final score
 print(f"\nYou got {num_correct} correct.")
+save_score(num_correct, len(questions))

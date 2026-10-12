@@ -1,44 +1,36 @@
 {
-  "Which NFL quarterback holds the record for the most Super Bowl wins?": [
-    "Tom Brady",
-    "Joe Montana",
-    "John Elway",
-    "Peyton Manning"
-  ],
-  "Which city's NFL team is nicknamed the 'Cheeseheads' by their fans?": [
-    "Green Bay (Packers)",
-    "Chicago (Bears)",
-    "Minnesota (Vikings)",
-    "Detroit (Lions)"
-  ],
-  "How many points is a touchdown worth in American football?": [
-    "6",
-    "7",
-    "8",
-    "3"
-  ],
-  "What is the name of the trophy awarded to the NFL Super Bowl champion?": [
-    "Vince Lombardi Trophy",
-    "Pete Rozelle Trophy",
-    "Lamar Hunt Trophy",
-    "George Halas Trophy"
-  ],
-  "In what year was Super Bowl I played?": [
-    "1967",
-    "1968",
-    "1969",
-    "1970"
-  ],
-  "Which team plays its home games at Lambeau Field?": [
-    "Green Bay Packers",
-    "Los Angeles Rams",
-    "Baltimore Ravens",
-    "Seattle Seahawks"
-  ],
-  "In what year did the AFL and NFL officially merge into a single league?": [
-    "1970",
-    "1966",
-    "1975",
-    "1968"
-  ]
+  "Which NFL quarterback holds the record for the most Super Bowl wins?": {
+    "answers": ["Tom Brady", "Joe Montana", "John Elway", "Peyton Manning"],
+    "explanation": ["Tom Brady holds the record for the most Super Bowl wins with 7 championships."]
+  },
+
+  "Which city's NFL team is nicknamed the 'Cheeseheads' by their fans?": {
+    "answers": ["Green Bay (Packers)", "Chicago (Bears)", "Minnesota (Vikings)", "Detroit (Lions)"],
+    "explanation": ["Green Bay is known for the 'Cheeseheads' nickname."]
+  },
+
+  "How many points is a touchdown worth in American football?": {
+    "answers": ["6", "7", "8", "3"],
+    "explanation": ["A touchdown is worth 6 points in American football."]
+  },
+
+  "What is the name of the trophy awarded to the NFL Super Bowl champion?": {
+    "answers": ["Vince Lombardi Trophy", "Pete Rozelle Trophy", "Lamar Hunt Trophy", "George Halas Trophy"],
+    "explanation": ["The Vince Lombardi Trophy is awarded to the NFL Super Bowl champion."]
+  },
+  
+  "In what year was Super Bowl I played?": {
+    "answers": ["1967", "1968", "1969", "1970"],
+    "explanation": ["Super Bowl I was played in 1967."]
+  },
+
+  "Which team plays its home games at Lambeau Field?": {
+    "answers": ["Green Bay Packers", "Los Angeles Rams", "Baltimore Ravens", "Seattle Seahawks"],
+    "explanation": ["The Green Bay Packers play their home games at Lambeau Field."]
+  },
+
+  "In what year did the AFL and NFL officially merge into a single league?": {
+    "answers": ["1970", "1966", "1975", "1968"],
+    "explanation": ["The AFL and NFL officially merged into a single league in 1970."]
+  }
 }
