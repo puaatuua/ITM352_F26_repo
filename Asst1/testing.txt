@@ -1,0 +1,334 @@
+Feature / Expected result
+1. Correct answer / Prints 'Correct!' and adds one point
+Actual output:
+avapuaatuua@Mac Asst1 % python3 Final_Version.py
+
+Question 1: Which NFL quarterback holds the record for the most Super Bowl wins?
+a. Peyton Manning
+b. Tom Brady
+c. John Elway
+d. Joe Montana
+Choice? b
+Correct!
+Explanation: ['Tom Brady holds the record for the most Super Bowl wins with 7 championships.']
+
+Question 2: In what year was Super Bowl I played?
+a. 1969
+b. 1968
+c. 1967
+d. 1970
+Choice? c
+Correct!
+Explanation: ['Super Bowl I was played in 1967.']
+
+Question 3: In what year did the AFL and NFL officially merge into a single league?
+a. 1970
+b. 1966
+c. 1975
+d. 1968
+Choice? a
+Correct!
+Explanation: ['The AFL and NFL officially merged into a single league in 1970.']
+
+Question 4: Which city's NFL team is nicknamed the 'Cheeseheads' by their fans?
+a. Green Bay (Packers)
+b. Minnesota (Vikings)
+c. Detroit (Lions)
+d. Chicago (Bears)
+Choice? a
+Correct!
+Explanation: ["Green Bay is known for the 'Cheeseheads' nickname."]
+
+Question 5: What is the name of the trophy awarded to the NFL Super Bowl champion?
+a. George Halas Trophy
+b. Vince Lombardi Trophy
+c. Pete Rozelle Trophy
+d. Lamar Hunt Trophy
+Choice? b
+Correct!
+Explanation: ['The Vince Lombardi Trophy is awarded to the NFL Super Bowl champion.']
+
+You got 5 correct.
+
+2. Incorrect answer / Shows the correct answer and adds zero points
+Actual output:
+avapuaatuua@Mac Asst1 % python3 Final_Version.py
+
+Question 1: In what year did the AFL and NFL officially merge into a single league?
+a. 1968
+b. 1975
+c. 1966
+d. 1970
+Choice? a
+The answer is ''1970'', not '1968'.
+Explanation: ['The AFL and NFL officially merged into a single league in 1970.']
+
+Question 2: How many points is a touchdown worth in American football?
+a. 6
+b. 8
+c. 3
+d. 7
+Choice? c
+The answer is ''6'', not '3'.
+Explanation: ['A touchdown is worth 6 points in American football.']
+
+Question 3: Which city's NFL team is nicknamed the 'Cheeseheads' by their fans?
+a. Chicago (Bears)
+b. Green Bay (Packers)
+c. Minnesota (Vikings)
+d. Detroit (Lions)
+Choice? a
+The answer is ''Green Bay (Packers)'', not 'Chicago (Bears)'.
+Explanation: ["Green Bay is known for the 'Cheeseheads' nickname."]
+
+Question 4: What is the name of the trophy awarded to the NFL Super Bowl champion?
+a. George Halas Trophy
+b. Lamar Hunt Trophy
+c. Pete Rozelle Trophy
+d. Vince Lombardi Trophy
+Choice? b
+The answer is ''Vince Lombardi Trophy'', not 'Lamar Hunt Trophy'.
+Explanation: ['The Vince Lombardi Trophy is awarded to the NFL Super Bowl champion.']
+
+Question 5: Which team plays its home games at Lambeau Field?
+a. Los Angeles Rams
+b. Green Bay Packers
+c. Seattle Seahawks
+d. Baltimore Ravens
+Choice? d
+The answer is ''Green Bay Packers'', not 'Baltimore Ravens'.
+Explanation: ['The Green Bay Packers play their home games at Lambeau Field.']
+
+You got 0 correct.
+
+3. Explanation / Appears after every question
+Actual output:
+avapuaatuua@Mac Asst1 % python3 Final_Version.py
+
+Question 1: In what year did the AFL and NFL officially merge into a single league?
+a. 1968
+b. 1975
+c. 1966
+d. 1970
+Choice? a
+The answer is ''1970'', not '1968'.
+Explanation: ['The AFL and NFL officially merged into a single league in 1970.']
+
+Question 2: How many points is a touchdown worth in American football?
+a. 6
+b. 8
+c. 3
+d. 7
+Choice? c
+The answer is ''6'', not '3'.
+Explanation: ['A touchdown is worth 6 points in American football.']
+
+Question 3: Which city's NFL team is nicknamed the 'Cheeseheads' by their fans?
+a. Chicago (Bears)
+b. Green Bay (Packers)
+c. Minnesota (Vikings)
+d. Detroit (Lions)
+Choice? a
+The answer is ''Green Bay (Packers)'', not 'Chicago (Bears)'.
+Explanation: ["Green Bay is known for the 'Cheeseheads' nickname."]
+
+Question 4: What is the name of the trophy awarded to the NFL Super Bowl champion?
+a. George Halas Trophy
+b. Lamar Hunt Trophy
+c. Pete Rozelle Trophy
+d. Vince Lombardi Trophy
+Choice? b
+The answer is ''Vince Lombardi Trophy'', not 'Lamar Hunt Trophy'.
+Explanation: ['The Vince Lombardi Trophy is awarded to the NFL Super Bowl champion.']
+
+Question 5: Which team plays its home games at Lambeau Field?
+a. Los Angeles Rams
+b. Green Bay Packers
+c. Seattle Seahawks
+d. Baltimore Ravens
+Choice? d
+The answer is ''Green Bay Packers'', not 'Baltimore Ravens'.
+Explanation: ['The Green Bay Packers play their home games at Lambeau Field.']
+
+You got 0 correct.
+
+4. Uppercase choice / Is accepted
+Actual output:
+avapuaatuua@Mac Asst1 % python3 Final_Version.py
+
+Question 1: Which NFL quarterback holds the record for the most Super Bowl wins?
+a. John Elway
+b. Joe Montana
+c. Tom Brady
+d. Peyton Manning
+Choice? A
+The answer is ''Tom Brady'', not 'John Elway'.
+Explanation: ['Tom Brady holds the record for the most Super Bowl wins with 7 championships.']
+
+Question 2: In what year was Super Bowl I played?
+a. 1968
+b. 1967
+c. 1970
+d. 1969
+Choice? B
+Correct!
+Explanation: ['Super Bowl I was played in 1967.']
+
+Question 3: How many points is a touchdown worth in American football?
+a. 6
+b. 8
+c. 7
+d. 3
+Choice? C
+The answer is ''6'', not '7'.
+Explanation: ['A touchdown is worth 6 points in American football.']
+
+Question 4: What is the name of the trophy awarded to the NFL Super Bowl champion?
+a. Lamar Hunt Trophy
+b. George Halas Trophy
+c. Pete Rozelle Trophy
+d. Vince Lombardi Trophy
+Choice? D
+Correct!
+Explanation: ['The Vince Lombardi Trophy is awarded to the NFL Super Bowl champion.']
+
+Question 5: Which team plays its home games at Lambeau Field?
+a. Los Angeles Rams
+b. Seattle Seahawks
+c. Green Bay Packers
+d. Baltimore Ravens
+Choice? D
+The answer is ''Green Bay Packers'', not 'Baltimore Ravens'.
+Explanation: ['The Green Bay Packers play their home games at Lambeau Field.']
+
+You got 2 correct.
+
+5. Invalid choice / Causes a retry message
+Actual output:
+avapuaatuua@Mac Asst1 % python3 Final_Version.py
+
+Question 1: Which city's NFL team is nicknamed the 'Cheeseheads' by their fans?
+a. Chicago (Bears)
+b. Detroit (Lions)
+c. Minnesota (Vikings)
+d. Green Bay (Packers)
+Choice? F    
+Invalid choice. Please select one of a, b, c, d.
+
+6. Number of questions / Five questions are asked
+Actual output:
+avapuaatuua@Mac Asst1 % python3 Final_Version.py
+
+Question 1: Which city's NFL team is nicknamed the 'Cheeseheads' by their fans?
+a. Chicago (Bears)
+b. Detroit (Lions)
+c. Minnesota (Vikings)
+d. Green Bay (Packers)
+Choice? F    
+Invalid choice. Please select one of a, b, c, d.
+Choice? a
+The answer is ''Green Bay (Packers)'', not 'Chicago (Bears)'.
+Explanation: ["Green Bay is known for the 'Cheeseheads' nickname."]
+
+Question 2: In what year did the AFL and NFL officially merge into a single league?
+a. 1968
+b. 1970
+c. 1966
+d. 1975
+Choice? a
+The answer is ''1970'', not '1968'.
+Explanation: ['The AFL and NFL officially merged into a single league in 1970.']
+
+Question 3: In what year was Super Bowl I played?
+a. 1970
+b. 1968
+c. 1969
+d. 1967
+Choice? a
+The answer is ''1967'', not '1970'.
+Explanation: ['Super Bowl I was played in 1967.']
+
+Question 4: How many points is a touchdown worth in American football?
+a. 3
+b. 8
+c. 7
+d. 6
+Choice? a
+The answer is ''6'', not '3'.
+Explanation: ['A touchdown is worth 6 points in American football.']
+
+Question 5: What is the name of the trophy awarded to the NFL Super Bowl champion?
+a. Pete Rozelle Trophy
+b. Vince Lombardi Trophy
+c. Lamar Hunt Trophy
+d. George Halas Trophy
+Choice? a
+The answer is ''Vince Lombardi Trophy'', not 'Pete Rozelle Trophy'.
+Explanation: ['The Vince Lombardi Trophy is awarded to the NFL Super Bowl champion.']
+
+You got 0 correct.
+
+7. Final score / Matches the number correct
+Actual output:
+avapuaatuua@Mac Asst1 % python3 Final_Version.py
+
+Question 1: Which city's NFL team is nicknamed the 'Cheeseheads' by their fans?
+a. Chicago (Bears)
+b. Detroit (Lions)
+c. Minnesota (Vikings)
+d. Green Bay (Packers)
+Choice? F    
+Invalid choice. Please select one of a, b, c, d.
+Choice? a
+The answer is ''Green Bay (Packers)'', not 'Chicago (Bears)'.
+Explanation: ["Green Bay is known for the 'Cheeseheads' nickname."]
+
+Question 2: In what year did the AFL and NFL officially merge into a single league?
+a. 1968
+b. 1970
+c. 1966
+d. 1975
+Choice? a
+The answer is ''1970'', not '1968'.
+Explanation: ['The AFL and NFL officially merged into a single league in 1970.']
+
+Question 3: In what year was Super Bowl I played?
+a. 1970
+b. 1968
+c. 1969
+d. 1967
+Choice? a
+The answer is ''1967'', not '1970'.
+Explanation: ['Super Bowl I was played in 1967.']
+
+Question 4: How many points is a touchdown worth in American football?
+a. 3
+b. 8
+c. 7
+d. 6
+Choice? a
+The answer is ''6'', not '3'.
+Explanation: ['A touchdown is worth 6 points in American football.']
+
+Question 5: What is the name of the trophy awarded to the NFL Super Bowl champion?
+a. Pete Rozelle Trophy
+b. Vince Lombardi Trophy
+c. Lamar Hunt Trophy
+d. George Halas Trophy
+Choice? a
+The answer is ''Vince Lombardi Trophy'', not 'Pete Rozelle Trophy'.
+Explanation: ['The Vince Lombardi Trophy is awarded to the NFL Super Bowl champion.']
+
+You got 0 correct.
+
+8. Score history / A new timestamped line is appended
+Actual output:
+2026-10-11 22:01:39 - 2/5 correct
+2026-10-11 22:03:04 - 5/5 correct
+2026-10-11 22:47:20 - 0/5 correct
+2026-10-11 22:48:45 - 2/5 correct
+2026-10-11 22:58:07 - 0/5 correct
+
+9. Randomization / Questions and answers vary between runs
+Actual output:
+
