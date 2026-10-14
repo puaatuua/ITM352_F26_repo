@@ -1,0 +1,15 @@
+
+
+
+def GCD(num1,num2):
+    for count in range(min(num1,num2),1,-1)
+        if num1 % count == 0 and num2 % count == 0:
+            return count
+    
+    return GCD_number
+
+
+def Euclid(a,b):
+    while b != 0:
+        a,b = b, a%b
+    return a
