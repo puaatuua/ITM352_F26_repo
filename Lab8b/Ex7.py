@@ -18,7 +18,7 @@ weekly_steps = {
 
 
 def choose_badge(average):
-   if average > 10000:
+   if average >= 10000:
        return "Gold"
    elif average >= 7500:
        return "Silver"
@@ -26,8 +26,8 @@ def choose_badge(average):
        return "Bronze"
 
 
-total = 0
 for name in weekly_steps:
+   total = 0
    days = weekly_steps[name]
    for steps in days:
        total += steps
