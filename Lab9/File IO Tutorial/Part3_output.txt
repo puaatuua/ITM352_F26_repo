@@ -1,0 +1,8 @@
+First line
+Second line
+Third line
+Appending a number: 15
+Appending a list:
+Item 1
+Item 2
+Item 3
