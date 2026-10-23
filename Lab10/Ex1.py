@@ -1,10 +1,12 @@
-# Create a list of tuples that are percentiles and Household Incomes
+# Analyze an array of tuples using numpy
 
 # Name: Ava Puaatuua
-# Date: Oct. 21, 2026
+# Date: Oct. 23, 2026
 
-# List of tuples: (Percentile, Income)
-income_data = [
+import numpy as np
+
+# Create an array of typles of household income and percentiles.
+hh_income = [
     (10, 14629),
     (20, 25600),
     (30, 37002),
@@ -16,3 +18,22 @@ income_data = [
     (90, 184292)
 ]
 
+hh_income_array = np.array(hh_income)
+
+# Report the dimensions of the array and the number of elements in the array
+print(f"Dimensions of the array: {hh_income_array.ndim}")
+print(f"Number of elements in the array: {hh_income_array.size}")
+
+for i in range(hh_income_array.shape[0]):
+    percentile, income = hh_income_array[i]
+    print(f"Percentile: {percentile}, Income: ${income}")
+
+for i in range (hh_income_array.shape[0]):
+    print(hh_income_array[i, 0], hh_income_array[i, 1])
+
+print("\nTotal income of each percentile group:")
+for i in range(len(hh_income_array)):
+    percentile, income = hh_income_array[i]
+    total_income = percentile * income
+    print(f"Percentile (hh_income_array[i][0]): ${total_income:,}")
+    
