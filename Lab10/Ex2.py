@@ -12,10 +12,12 @@ gender = ["M", "M", "M", "F", "M", "F", "F", "M", "F", "F"]
 
 raw_data = zip(ages, gender)
 
-# Create a Pandas datagrame from the lists
+# Create a Pandas dataframe from the lists
 df = pd.DataFrame(data=raw_data, index=names, columns=["Age", "Gender"])
+print(f'Dataframe:\n{df}')
 
-summary = df.describe() # Get summary statistics for the dataframe
+# Get summary statistics for the dataframe
+summary = df.describe()
 print(summary) 
 
 # Calculate average age by gender
