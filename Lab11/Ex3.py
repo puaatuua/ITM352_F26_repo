@@ -12,13 +12,13 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 # Tell Pandas to print all columns when displaying a DataFrame
 pd.set_option('display.max_columns', None)
-pd.set_option('display.float_format', '{:.2f}'.format)
+pd.set_option('display.float_format', '{:.2f}'.format) # Format float numbers to 2 decimal places
 
 csv_file = 'sales_data.csv'
 
 try:
     df = pd.read_csv(csv_file, engine='pyarrow', on_bad_lines='skip')
-    df['order_date'] = pd.to_datetime(df['order_date'], errors='coerce')
+    df['order_date'] = pd.to_datetime(df['order_date'], errors='coerce',format='%Y-%m-%d')  # Convert order_date to datetime, coerce errors to NaT
     # print(df.head())
 
     # Calculate sales total per row
