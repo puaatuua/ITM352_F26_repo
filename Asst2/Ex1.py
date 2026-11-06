@@ -1,3 +1,9 @@
+# Write a program that loads the CSV file from the given URL
+# And writes out a local “sales_data_test.csv” file from the first 10 rows of this data
+
+# Name: Ava Puaatuua
+# Date: Nov. 5, 2026
+
 import pandas as pd
 import ssl
 
