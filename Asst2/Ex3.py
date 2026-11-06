@@ -1,3 +1,8 @@
+# Workshop, part 3
+
+# Name: Ava Puaatuua
+# Date: Nov. 6, 2026
+
 import pandas as pd
 import ssl
 import time
