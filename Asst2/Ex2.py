@@ -1,4 +1,4 @@
-# Write a function load_csv() that loads a CSV file into a dataframe
+# Workshop, part 2
 
 # Name: Ava Puaatuua
 # Date: Nov. 5, 2026
@@ -10,16 +10,17 @@ import time
 #Temporary fix
 ssl._create_default_https_context = ssl._create_unverified_context
 
+# Write a function load_csv() that loads a CSV file into a dataframe. 
+# It should indicate the file is being loaded and when it is successfully loaded and the time it took to load. 
 def load_csv(filepath):
     print(f"Loading CSV file from: {filepath}")
     start_time = time.time()
 
     try:
-        df = pd.read_csv(filepath,engine='pyarrow',on_bad_lines='skip')
+        df = pd.read_csv(filepath,engine='pyarrow',on_bad_lines='skip') # Use the pyarrow backend to skip bad rows
         end_time = time.time()
         load_time = end_time - start_time
         print(f"CSV file loaded successfully in {load_time:.2f} seconds.")
-        print(f"Numbner of rows: {len(df)}")
         return df
 
     except Exception as e:
@@ -35,7 +36,22 @@ sales_data = load_csv(csv_file)
 
 # Check if the dataframe was loaded successfully before attempting to print the first 10 rows
 if sales_data is not None:
+
+    # Convert to datetime, coerce errors to NaT
+    sales_data['order_date'] = pd.to_datetime(
+        sales_data['order_date'], 
+        dayfirst=True, 
+        format="mixed", 
+        errors='coerce'
+    ).dt.strftime("%m/%d/%Y") 
+
+    # Print the number of rows and list the columns of the dataframe
+    print(f'\nNumber of rows in the dataframe: {len(sales_data)}')
+    print(f'Columns in the dataframe: {list(sales_data.columns)}')
+
+    # Print the first 10 rows of the dataframe
     print(sales_data.head(10))
-# describe the dataframe field data types
+    
+    # describe the dataframe field data types
     print("\nData types of the dataframe fields:")
     print(sales_data.dtypes)
