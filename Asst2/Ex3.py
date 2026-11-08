@@ -29,32 +29,53 @@ def load_csv(filepath):
 
 
 def display_initial_rows(data):
+    # Ask the user how many initial rows to show and print them.
 
+    while True:
+        response = input(f'\nHow many initial rows would you like to see? '
+                         f'(1-{len(data)} or "all" to see all rows): ').strip().lower()
 
+        if response == 'all':
+            print(data)
+            return
 
+        try:
+            num_rows = int(response)
+        except ValueError:
+            print(f'Invalid input "{response}". Please enter a whole number or "all".')
+            continue
 
-# Call load_csv to load the data into a dataframe, and print the first 10 rows
-csv_file = 'https://drive.google.com/uc?id=1ujY0WCcePdotG2xdbLyeECFW9lCJ4t-K&export=download'
-sales_data = load_csv(csv_file)
+        if num_rows < 1:
+            print("Please enter a number greater than 0.")
+            continue
 
-# Check if the dataframe was loaded successfully before attempting to print the first 10 rows
-if sales_data is not None:
+        if num_rows > len(data):
+            print(f"Only {len(data)} rows available; showing all of them.")
+            continue
 
-    # Convert to datetime, coerce errors to NaT
-    sales_data['order_date'] = pd.to_datetime(
-        sales_data['order_date'], 
-        dayfirst=True, 
-        format="mixed", 
-        errors='coerce'
-    ).dt.strftime("%m/%d/%Y") 
-
-    # Print the number of rows and list the columns of the dataframe
-    print(f'\nNumber of rows in the dataframe: {len(sales_data)}')
-    print(f'Columns in the dataframe: {list(sales_data.columns)}')
-
-    # Print the first 10 rows of the dataframe
-    print(sales_data.head(10))
+        print(data.head(num_rows))
+        return
     
+
+
+def main():
+    csv_file = 'https://drive.google.com/uc?id=1ujY0WCcePdotG2xdbLyeECFW9lCJ4t-K&export=download'
+    # csv_file = "junk.csv"  # Intentionally incorrect path to test error handling
+    sales_data = load_csv(csv_file)
+
+    if sales_data is None:
+        return
+
     # describe the dataframe field data types
     print("\nData types of the dataframe fields:")
     print(sales_data.dtypes)
+
+    try:
+        while True:
+            display_initial_rows(sales_data)
+    except (KeyboardInterrupt, EOFError):
+        print("\nExiting.")
+
+
+if __name__ == "__main__":
+    main()
