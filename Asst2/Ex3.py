@@ -73,6 +73,11 @@ def main():
     try:
         while True:
             display_initial_rows(sales_data)
+
+            again = input("\nWould you like to see more rows? (y/n): ").strip().lower()
+            if again != 'y':
+                print("Exiting.")
+                break
     except (KeyboardInterrupt, EOFError):
         print("\nExiting.")
 
