@@ -3,9 +3,6 @@
 # Name: Ava Puaatuua
 # Date: Nov. 8, 2026
 
-from secrets import choice
-
-from click import prompt
 import pandas as pd
 import ssl
 import time
