@@ -69,7 +69,7 @@ def display_initial_rows(data):
     
 
 
-def show_total_sales_by_region_and_order_type(data):
+def calculate_total_sales_by_region_and_order_type(data):
     """Aggregate sales bt region, with columns defined by order_type (Retail or Wholesale)"""
     required = ['sales_region', 'order_type', 'quantity', 'unit_price']
     missing = [col for col in required if col not in data.columns]
@@ -88,11 +88,12 @@ def show_total_sales_by_region_and_order_type(data):
     )
     print("\nTotal sales by region and order type:")
     with pd.option_context("display.width", 200, "display.max_columns", None):
-        print(pivot_table.round(2))
+        return pivot_table.round(2)
 
 
 
-def show_average_sales_by_region(data):
+
+def calculate_average_sales_by_region(data):
     """Aggregate sales by region with sub-colums showing the average sales by state and by sale type (Retail or Wholesale)"""
     required = ['sales_region', 'customer_state', 'order_type', 'quantity', 'unit_price']
     missing = [col for col in required if col not in data.columns]
@@ -111,11 +112,12 @@ def show_average_sales_by_region(data):
     )
     print("\nAverage sales by region, by state and sale type:")
     with pd.option_context("display.width", 200, "display.max_columns", None):
-        print(pivot_table.round(2))
+        return pivot_table.round(2)
 
 
 
-def show_sales_by_customer_type_and_order_type_by_state(data):
+
+def calculate_sales_by_customer_type_and_order_type_by_state(data):
     """Pivot table with sub-rows showing sales by customer type and order type, with state sub-columns"""
     required = ['customer_state', 'customer_type', 'order_type', 'quantity', 'unit_price']
     missing = [col for col in required if col not in data.columns]
@@ -134,11 +136,11 @@ def show_sales_by_customer_type_and_order_type_by_state(data):
     )
     print("\nTotal sales by customer type and order type, by state:")
     with pd.option_context("display.width", 200, "display.max_columns", None):
-        print(pivot_table.round(2))
+        return pivot_table.round(2)
 
 
 
-def show_total_sales_quantity_and_price_by_region_and_product(data):
+def calculate_total_sales_quantity_and_price_by_region_and_product(data):
     """Pivot sales by region and product, summing the quantity and sales price per row"""
     required = ['sales_region', 'produce_name', 'quantity', 'unit_price']
     missing = [col for col in required if col not in data.columns]
@@ -157,11 +159,12 @@ def show_total_sales_quantity_and_price_by_region_and_product(data):
     )
     print("\nTotal sales by region and product:")
     with pd.option_context("display.width", 200, "display.max_columns", None):
-        print(pivot_table.round(2))
+        return pivot_table.round(2)
 
 
 
-def show_total_sales_quantity_and_price_by_customer_type(data):
+
+def calculate_total_sales_quantity_and_price_by_customer_type(data):
     """Pivot sales by order and customer type, summing the quantity and sales price per row"""
     required = ['customer_type', 'order_type', 'quantity', 'unit_price']
     missing = [col for col in required if col not in data.columns]
@@ -180,46 +183,12 @@ def show_total_sales_quantity_and_price_by_customer_type(data):
     )
     print("\nTotal sales by customer type and order type:")
     with pd.option_context("display.width", 200, "display.max_columns", None):
-        print(pivot_table.round(2))
+        return pivot_table.round(2)
 
 
 
-def get_user_selection(options, prompt, required=False, single=False): 
-    """Prompt for comma-separated option numbers and return the chosen options.
-    
-    Re-promps on invalid input. An empty entry returns [] unless required."""
-    
-    while True:
-        print(prompt)
-        for i, option in enumerate(options):
-            print(f"{i+1}. {option}") 
-            
-        choice = input("Enter the number(s) of your choice(s), separated by commas: ").strip()
-        if not choice:
-            if required:
-                print("A selection is required.")
-                continue
-            return []
 
-        try:
-            indexes = [int(i) for i in choice.split(',')]
-        except ValueError:
-            print("Invalid input. Please enter numbers separated by commas.")
-            continue
-
-        if any(i < 1 or i > len(options) for i in indexes):
-            print(f'Each number must be between 1 and {len(options)}.')
-            continue
-
-        selected = list(dict.fromkeys(options[i-1] for i in indexes))  # Remove duplicates while preserving order
-        if single and len(selected) != 1:
-            print("Please select exactly one option.")
-            continue
-        return selected
-
-
-
-def show_max_min_sales_price_by_category(data):
+def calculate_max_min_sales_price_by_category(data):
     """Pivot sales by category and show the max and min sales price per row"""
     required = ['product_category', 'unit_price']
     missing = [col for col in required if col not in data.columns]
@@ -235,7 +204,7 @@ def show_max_min_sales_price_by_category(data):
     )
     print("\nMax and min sales price by category:")
     with pd.option_context("display.width", 200, "display.max_columns", None):
-        print(pivot_table.round(2))
+        return pivot_table.round(2)
 
 
 
@@ -279,7 +248,96 @@ def generate_custom_pivot_table(data):
         return
 
     print("\nCustom pivot table:")
-    print(pivot_table)
+    return pivot_table
+
+
+def compare_two_pivot_tables(data):
+    """Get two analytics results and compare them side by side"""
+
+    # Display the available analytics options for the user to choose from
+    analytics = [
+        ("Total sales by region and order type", calculate_total_sales_by_region_and_order_type),
+       ("Average sales by region with average sales by state and sale type", calculate_average_sales_by_region),
+       ("Sales by customer type and order type by state", calculate_sales_by_customer_type_and_order_type_by_state),
+       ("Total sales quantity and price by region and product", calculate_total_sales_quantity_and_price_by_region_and_product),
+       ("Total sales quantity and price by customer type", calculate_total_sales_quantity_and_price_by_customer_type),
+       ("Max and min sales price of sales by category", calculate_max_min_sales_price_by_category),
+       ("Number of unique employees by region", show_employees_by_region),
+    ]
+
+    # Prompt the user for the first analytic to compare
+    print("\nChoose the first analytic:")
+    for number, (description, _) in enumerate(analytics, start=1):
+        print(f"{number}. {description}")
+
+    first_number = int(input("Enter the number: "))
+    first_description, first_function = analytics[first_number - 1] # -1 because Python indexes lists from 0
+
+    # Prompt the user for the second analytic to compare
+    print("\nChoose the second analytic:")
+    for number, (description, _) in enumerate(analytics, start=1):
+        print(f"{number}. {description}")
+
+    second_number = int(input("Enter the number: "))
+    second_description, second_function = analytics[second_number - 1] # -1 because Python indexes lists from 0
+
+    first_rows = select_data_rows(data)
+    second_rows = select_data_rows(data)
+
+    first_table = first_function(first_rows)
+    second_table = second_function(second_rows)
+
+    if first_table is None or second_table is None:
+        print("The analytics could not be calculated.")
+        return
+
+    # Combine the two pivot tables side by side for comparison
+    comparison = pd.concat(
+        [first_table, second_table],
+        axis=1, # Place the two tables beside each other
+        keys=[first_description, second_description] # Label the two sections
+    )
+
+    print("\nComparison of the two analytics:")
+    with pd.option_context("display.width", 200,
+                           "display.max_columns", None):
+        print(comparison.round(2))
+
+
+
+def select_data_rows(data):
+    '''Ask the user what data rows to use for the analytic'''
+
+    while True: # Continue the loop until the user enters valid row numbers
+        response = input(
+            f"Enter rows to use, such as 1-10 or 1,4,7 "
+            f"(1-{len(data)}): "
+        ).strip()
+
+        try:
+            selected_rows = set() # a set prevents duplicate row numbers
+            for part in response.split(","): # Split the input at commas to handle multiple ranges or single numbers
+                part = part.strip()
+
+                if "-" in part:
+                    start, end = map(int, part.split("-", 1))
+                    if start > end:
+                        raise ValueError 
+                    selected_rows.update(range(start, end + 1)) # +1 bevause range is exclusive at the end
+                else: 
+                    selected_rows.add(int(part))
+
+            if not selected_rows:
+                raise ValueError
+
+            if any(row < 1 or row > len(data) for row in selected_rows):
+                raise ValueError # reject rows less than 1 or greater than the number of rows in the dataframe
+
+            indexes = [row - 1 for row in sorted(selected_rows)]
+            return data.iloc[indexes] # return only the selected rows
+
+        except ValueError:
+            print(f"Invalid input '{response}'. Please enter valid row numbers or ranges.")
 
 
 
@@ -288,17 +346,52 @@ def exit_program(data=None):
     raise SystemExit(0)
 
 
+def get_user_selection(options, prompt, required=False, single=False): 
+    """Prompt for comma-separated option numbers and return the chosen options.
+    
+    Re-prompts on invalid input. An empty entry returns [] unless required."""
+    
+    while True:
+        print(prompt)
+        for i, option in enumerate(options):
+            print(f"{i+1}. {option}") 
+            
+        choice = input("Enter the number(s) of your choice(s), separated by commas: ").strip()
+        if not choice:
+            if required:
+                print("A selection is required.")
+                continue
+            return []
+
+        try:
+            indexes = [int(i) for i in choice.split(',')]
+        except ValueError:
+            print("Invalid input. Please enter numbers separated by commas.")
+            continue
+
+        if any(i < 1 or i > len(options) for i in indexes):
+            print(f'Each number must be between 1 and {len(options)}.')
+            continue
+
+        selected = list(dict.fromkeys(options[i-1] for i in indexes))  # Remove duplicates while preserving order
+        if single and len(selected) != 1:
+            print("Please select exactly one option.")
+            continue
+        return selected
+
+
 
 menu_options = (
    ("Show the first n rows of sales data", display_initial_rows),
-   ("Total sales by region and order type", show_total_sales_by_region_and_order_type),
-   ("Average sales by region with average sales by state and sale type", show_average_sales_by_region),
-   ("Sales by customer type and order type by state", show_sales_by_customer_type_and_order_type_by_state),
-   ("Total sales quantity and price by region and product", show_total_sales_quantity_and_price_by_region_and_product),
-   ("Total sales quantity and price by customer type", show_total_sales_quantity_and_price_by_customer_type),
-   ("Max and min sales price of sales by category", show_max_min_sales_price_by_category),
+   ("Total sales by region and order type", calculate_total_sales_by_region_and_order_type),
+   ("Average sales by region with average sales by state and sale type", calculate_average_sales_by_region),
+   ("Sales by customer type and order type by state", calculate_sales_by_customer_type_and_order_type_by_state),
+   ("Total sales quantity and price by region and product", calculate_total_sales_quantity_and_price_by_region_and_product),
+   ("Total sales quantity and price by customer type", calculate_total_sales_quantity_and_price_by_customer_type),
+   ("Max and min sales price of sales by category", calculate_max_min_sales_price_by_category),
    ("Number of unique employees by region", show_employees_by_region),
    ("Create a custom pivot table", generate_custom_pivot_table),
+   ("Compare two pivot tables", compare_two_pivot_tables),
    ("Exit the program", exit_program)
 )
 
