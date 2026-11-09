@@ -291,6 +291,9 @@ def compare_two_pivot_tables(data):
         print("The analytics could not be calculated.")
         return
 
+    first_table = flatten_columns(first_table)
+    second_table = flatten_columns(second_table)
+
     # Combine the two pivot tables side by side for comparison
     comparison = pd.concat(
         [first_table, second_table],
@@ -305,45 +308,68 @@ def compare_two_pivot_tables(data):
 
 
 
+# This code was generated using Copilot with the prompt: "How can I make a function to prompt the user to select rows from a dataframe, allowing them to enter ranges (e.g., 1-10) or individual row numbers (e.g., 1,4,7), and return the selected rows as a new dataframe?"
 def select_data_rows(data):
-    '''Ask the user what data rows to use for the analytic'''
-
-    while True: # Continue the loop until the user enters valid row numbers
+    '''Let the user choose which df rows an analytic should use'''
+    while True:
         response = input(
             f"Enter rows to use, such as 1-10 or 1,4,7 "
             f"(1-{len(data)}): "
         ).strip()
 
         try:
-            selected_rows = set() # a set prevents duplicate row numbers
-            for part in response.split(","): # Split the input at commas to handle multiple ranges or single numbers
+            selected_rows = set() # Use a set to avoid duplicates
+
+            for part in response.split(","): # Separate the input by commas to handle individual numbers and ranges
                 part = part.strip()
 
                 if "-" in part:
-                    start, end = map(int, part.split("-", 1))
+                    start_text, end_text = part.split("-", 1)
+                    start = int(start_text.strip())
+                    end = int(end_text.strip())
+
                     if start > end:
-                        raise ValueError 
-                    selected_rows.update(range(start, end + 1)) # +1 bevause range is exclusive at the end
-                else: 
+                        raise ValueError
+
+                    selected_rows.update(range(start, end + 1))
+                else:
                     selected_rows.add(int(part))
 
-            if not selected_rows:
-                raise ValueError
+            if not selected_rows or any(
+                row < 1 or row > len(data)
+                for row in selected_rows
+            ):
+                raise ValueError # reject empty or out-of-bounds selections
 
-            if any(row < 1 or row > len(data) for row in selected_rows):
-                raise ValueError # reject rows less than 1 or greater than the number of rows in the dataframe
-
-            indexes = [row - 1 for row in sorted(selected_rows)]
+            indexes = [row - 1 for row in sorted(selected_rows)] # Convert row numbers for pandas
             return data.iloc[indexes] # return only the selected rows
 
         except ValueError:
-            print(f"Invalid input '{response}'. Please enter valid row numbers or ranges.")
+            print(
+                f"Invalid input: {response!r}. "
+                "Enter values such as 1-10 or 1,4,7."
+            )
+
+
+def flatten_columns(table):
+    flattened = []
+
+    for column in table.columns:
+        if isinstance(column, tuple):
+            flattened.append(" | ".join(str(value) for value in column))
+        else:
+            flattened.append(str(column))
+
+    result = table.copy()
+    result.columns = flattened
+    return result
 
 
 
 def exit_program(data=None):
     print("Exiting the program. Goodbye!")
     raise SystemExit(0)
+
 
 
 def get_user_selection(options, prompt, required=False, single=False): 
@@ -412,14 +438,16 @@ def display_menu():
 
 
 def main():
-    csv_file = 'https://drive.google.com/uc?id=1ujY0WCcePdotG2xdbLyeECFW9lCJ4t-K&export=download'
-    # csv_file = "junk.csv"  # Intentionally incorrect path to test error handling
+    csv_file = (
+        "https://drive.google.com/uc?"
+        "id=1ujY0WCcePdotG2xdbLyeECFW9lCJ4t-K&export=download"
+    )
+
     sales_data = load_csv(csv_file)
 
     if sales_data is None:
         return
 
-    # describe the dataframe field data types
     print("\nData types of the dataframe fields:")
     print(sales_data.dtypes)
 
@@ -427,7 +455,19 @@ def main():
         while True:
             selection = display_menu()
             _, action = menu_options[selection]
-            action(sales_data)
+
+            if action in (
+                display_initial_rows,
+                compare_two_pivot_tables,
+                exit_program,
+            ):
+                result = action(sales_data)
+            else:
+                selected_data = select_data_rows(sales_data)
+                result = action(selected_data)
+
+            if result is not None:
+                print(result)
 
     except (KeyboardInterrupt, EOFError):
         print("\nExiting.")
