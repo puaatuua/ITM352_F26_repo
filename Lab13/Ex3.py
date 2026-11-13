@@ -5,8 +5,18 @@
 # Date: Nov. 12, 2026
 
 from flask import Flask, render_template
+import requests
 
 app = Flask(__name__)
 
 @app.route('/')
-def index():
+def home():
+    url = "https://meme-api.com/gimme/wholesomememes"
+
+    response = requests.request("GET", url)
+    response_json = response.json()
+
+    meme = response_json["url"]
+    meme_source = response_json["subreddit"]
+
+    return render_template("meme.html", meme=meme, meme_source=meme_source)
