@@ -13,7 +13,7 @@ app = Flask(__name__)
 def home():
     url = "https://meme-api.com/gimme/wholesomememes"
 
-    response = requests.request("GET", url)
+    response = requests.get(url)
     response_json = response.json()
 
     meme = response_json["url"]
