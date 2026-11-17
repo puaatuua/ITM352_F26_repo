@@ -1,0 +1,19 @@
+[
+    {
+        "question": "Which NFL quarterback holds the record for the most Super Bowl wins?",
+        "options": ["Tom Brady", "Joe Montana", "John Elway", "Peyton Manning"],
+        "answer": "Tom Brady",
+        "category": "NFL History",
+        "difficulty": "Medium",
+        "explanation": "Tom Brady holds the record for the most Super Bowl wins with 7 championships."
+    }
+    ,
+    {
+        "question": "Which city's NFL team is nicknamed the 'Cheeseheads' by their fans?",
+        "options": ["Green Bay (Packers)", "Chicago (Bears)", "Minnesota (Vikings)", "Detroit (Lions)"],
+        "answer": "Green Bay (Packers)",
+        "category": "NFL History",
+        "difficulty": "Medium",
+        "explanation": "Green Bay is known for the 'Cheeseheads' nickname."
+    }
+]
