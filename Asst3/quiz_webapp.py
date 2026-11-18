@@ -20,6 +20,7 @@ def load_questions(filepath='questions.json'):
     try:
         with open(filepath, 'r') as file:
             return json.load(file)
+    # Handle the case where the file is not found    
     except FileNotFoundError:
         print(f"Error: {filepath} not found.")
         return {}
@@ -77,7 +78,7 @@ def setup():
         session["questions"] = filtered_questions
         session["question_index"] = 0
         session["score"] = 0
-        
+
         session["category_scores"] = {
             category: 0
         }
