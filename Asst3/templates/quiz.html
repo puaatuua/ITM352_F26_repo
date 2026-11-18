@@ -2,15 +2,80 @@
 <html lang="en">
 <head>
     <title>Quiz</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .option {
+            display: block;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            border-color:azure
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+        }
+
+        input:disabled + label {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+    </style>
 </head>
 <body>
-    <h1>Question 1: What is the capital of France?</h1>
+    <h1>{{ question.question }}</h1>
+
     <form method="POST">
-        <input type="radio" name="answer" value="Paris"> Paris<br>
-        <input type="radio" name="answer" value="Rome"> Rome<br>
-        <input type="radio" name="answer" value="Madrid"> Madrid<br>
-        <input type="radio" name="answer" value="Berlin"> Berlin<br>
-        <button type="submit">Submit Answer</button>
+        {% for option in question.options %}
+        <label class="option">
+            <input
+                type="radio"
+                name="answer"
+                value="{{ option }}"
+                required
+            >
+            {{ option }}
+        </label>
+    {% endfor %}
+
+        <button type="submit" disabled>Submit Answer</button>
     </form>
+
+    <script>
+        const answerInputs = document.querySelectorAll(
+            'input[name="answer"]'
+        );
+        const submitButton = document.querySelector(
+            'button[type="submit"]'
+        );
+
+        answerInputs.forEach((input) => {
+            input.addEventListener("change", () => {
+                answerInputs.forEach((option) => {
+                    option.disabled = true;
+                });
+
+                submitButton.disabled = false;
+            });
+        });
+    </script>
+
 </body>
 </html>
