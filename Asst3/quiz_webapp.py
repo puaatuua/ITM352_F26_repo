@@ -49,51 +49,66 @@ def quiz():
     if request.method == 'POST':
         question = session.get('question')
 
-        if question is None:
-            return redirect(url_for('quiz'))
-
         user_answer = request.form.get('answer')
-
-        if not user_answer:
-            return redirect(url_for('quiz'))
-
         correct = user_answer == question['answer']
 
-        feedback = (
-            "Correct!"
-            if correct
-            else f"The correct answer is {question['answer']}."
-        )
+        if correct:
+            session['score'] = session.get('score', 0) + 1
+
+        session['question_index'] = session.get('question_index', 0) + 1
+        is_finished = session['question_index'] >= len(session['questions'])
+
+        if is_finished:
+            return redirect(url_for('result'))
+
+        session['question'] = session['questions'][session['question_index']]
 
         return render_template(
             'question_result.html',
-            feedback=feedback,
             correct=correct,
             user_answer=user_answer,
             correct_answer=question['answer'],
             explanation=question['explanation']
         )
 
-    all_questions = load_questions()
-    quiz_questions = prepare_questions(
-        all_questions,
-        category="All",
-        difficulty="Medium"
+    if 'questions' not in session:
+        all_questions = load_questions()
+        session['questions'] = prepare_questions(
+            all_questions,
+            category="All",
+            difficulty="Medium"
+        )
+        session['question_index'] = 0
+        session['score'] = 0
+
+    question_index = session['question_index']
+    questions = session['questions']
+
+    if question_index >= len(questions):
+        return redirect(url_for('result'))
+
+    session['question'] = questions[question_index]
+
+    return render_template(
+        'quiz.html',
+        question=session['question']
     )
-
-    if not quiz_questions:
-        return "No matching questions found.", 404
-
-    question = quiz_questions[0]
-    session['question'] = question
-
-    return render_template('quiz.html', question=question)
 
 @app.route('/result')
 def result():
-    # Calculate and display the user's score
-    score = 1  # Example score for demonstration
-    return render_template('result.html', score=score)
+    score = session.get('score', 0)
+    total = len(session.get('questions', []))
+
+    session.pop('questions', None)
+    session.pop('question_index', None)
+    session.pop('question_index', None)
+    session.pop('score', None)
+
+    return render_template(
+        'result.html',
+        score=score,
+        total=total
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)
