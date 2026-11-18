@@ -2,9 +2,12 @@
 # Name: Ava Puaatuua
 # Date: Nov. 16, 2026
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import json
 import random
+
+app = Flask(__name__)
+app.secret_key = 'key123'
 
 def load_questions(filepath='questions.json'):
     # Load questions from the questions.json file
@@ -37,8 +40,6 @@ def prepare_questions(all_questions, category="All", difficulty="Easy"):
 
     return quiz_questions
 
-app = Flask(__name__)
-
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -46,8 +47,32 @@ def home():
 @app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
     if request.method == 'POST':
-        # Logic to capture the user’s answers and redirect to the result page
-        return redirect(url_for('result'))
+        question = session.get('question')
+
+        if question is None:
+            return redirect(url_for('quiz'))
+
+        user_answer = request.form.get('answer')
+
+        if not user_answer:
+            return redirect(url_for('quiz'))
+
+        correct = user_answer == question['answer']
+
+        feedback = (
+            "Correct!"
+            if correct
+            else f"The correct answer is {question['answer']}."
+        )
+
+        return render_template(
+            'question_result.html',
+            feedback=feedback,
+            correct=correct,
+            user_answer=user_answer,
+            correct_answer=question['answer'],
+            explanation=question['explanation']
+        )
 
     all_questions = load_questions()
     quiz_questions = prepare_questions(
@@ -56,9 +81,13 @@ def quiz():
         difficulty="Medium"
     )
 
+    if not quiz_questions:
+        return "No matching questions found.", 404
+
     question = quiz_questions[0]
-    # Load the question and options to display
-    return render_template('quiz.html', question=question)  # Displays the question and options
+    session['question'] = question
+
+    return render_template('quiz.html', question=question)
 
 @app.route('/result')
 def result():

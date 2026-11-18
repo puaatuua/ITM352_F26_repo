@@ -60,21 +60,21 @@
 
     <script>
         const answerInputs = document.querySelectorAll(
-            'input[name="answer"]'
-        );
-        const submitButton = document.querySelector(
-            'button[type="submit"]'
-        );
+    'input[name="answer"]'
+);
+const submitButton = document.querySelector(
+    'button[type="submit"]'
+);
 
-        answerInputs.forEach((input) => {
-            input.addEventListener("change", () => {
-                answerInputs.forEach((option) => {
-                    option.disabled = true;
-                });
-
-                submitButton.disabled = false;
-            });
+answerInputs.forEach((input) => {
+    input.addEventListener("change", () => {
+        answerInputs.forEach((option) => {
+            option.disabled = option !== input;
         });
+
+        submitButton.disabled = false;
+    });
+});
     </script>
 
 </body>
