@@ -9,6 +9,12 @@ import random
 app = Flask(__name__)
 app.secret_key = 'key123'
 
+DIFFICULTY_POINTS = {
+    "Easy": 1,
+    "Medium": 2,
+    "Hard": 3
+}
+
 def load_questions(filepath='questions.json'):
     # Load questions from the questions.json file
     try:
@@ -44,6 +50,61 @@ def prepare_questions(all_questions, category="All", difficulty="Easy"):
 def home():
     return render_template("index.html")
 
+@app.route("/setup", methods=["GET", "POST"])
+def setup():
+    all_questions = load_questions()
+
+    categories = sorted({
+        question["category"]
+        for question in all_questions
+    })
+
+    if request.method == "POST":
+        category = request.form["category"]
+        difficulty = request.form["difficulty"]
+
+        filtered_questions = [
+            question for question in all_questions
+            if question["category"].lower() == category.lower()
+            and question["difficulty"].lower() == difficulty.lower()
+        ]
+
+        if not filtered_questions:
+            return "No questions matched these options.", 400
+
+        random.shuffle(filtered_questions)
+
+        session["questions"] = filtered_questions
+        session["question_index"] = 0
+        session["score"] = 0
+        
+        session["category_scores"] = {
+            category: 0
+        }
+
+        session["category_totals"] = {
+            category: sum(
+                DIFFICULTY_POINTS[question["difficulty"]]
+                for question in filtered_questions
+            )
+        }
+
+        session["difficulty_total"] = sum(
+            DIFFICULTY_POINTS[question["difficulty"]]
+            for question in filtered_questions
+        )
+
+        session["category"] = category
+        session["difficulty"] = difficulty
+
+        return redirect(url_for("quiz"))
+
+    return render_template(
+        "setup.html",
+        categories=categories,
+        difficulties=["Easy", "Medium", "Hard"]
+    )
+
 @app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
     if request.method == 'POST':
@@ -53,7 +114,14 @@ def quiz():
         correct = user_answer == question['answer']
 
         if correct:
-            session['score'] = session.get('score', 0) + 1
+            points = DIFFICULTY_POINTS[question['difficulty']]
+
+            session["score"] = session.get("score", 0) + points
+
+            category = question['category']
+            category_scores = session.get("category_scores", {})
+            category_scores[category] = category_scores.get(category, 0) + points
+            session["category_scores"] = category_scores
 
         session['question_index'] = session.get('question_index', 0) + 1
         is_finished = session['question_index'] >= len(session['questions'])
@@ -94,21 +162,20 @@ def quiz():
         question=session['question']
     )
 
-@app.route('/result')
+@app.route("/result")
 def result():
-    score = session.get('score', 0)
-    total = len(session.get('questions', []))
-
-    session.pop('questions', None)
-    session.pop('question_index', None)
-    session.pop('question_index', None)
-    session.pop('score', None)
+    score = session.get("score", 0)
+    total = session.get("difficulty_total", 0)
+    category_scores = session.get("category_scores", {})
+    category_totals = session.get("category_totals", {})
 
     return render_template(
-        'result.html',
+        "result.html",
         score=score,
-        total=total
+        total=total,
+        category_scores=category_scores,
+        category_totals=category_totals
     )
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5050)
