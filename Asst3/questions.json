@@ -1,19 +1,202 @@
 [
     {
+        "question": "How many players from one team are on the court during a standard NBA game?",
+        "options": ["5", "6", "7", "8"],
+        "answer": "5",
+        "category": "Basketball",
+        "difficulty": "Easy",
+        "explanation": "In a standard NBA game, each team has 5 players on the court at a time."
+    },
+    {
+        "question": "Which NBA player is known as 'King James'?",
+        "options": ["LeBron James", "Michael Jordan", "Kobe Bryant", "Kevin Durant"],
+        "answer": "LeBron James",
+        "category": "Basketball",
+        "difficulty": "Medium",
+        "explanation": "LeBron James is often referred to as 'King James' due to his dominance in the sport."
+    },
+    {
+        "question": "Which team won the NBA Championship in 2022 behind Finals MVP Stephen Curry?",
+        "options": ["Golden State Warriors", "Boston Celtics", "Milwaukee Bucks", "Denver Nuggets"],
+        "answer": "Golden State Warriors",
+        "category": "Basketball",
+        "difficulty": "Medium",
+        "explanation": "The Golden State Warriors defeated the Boston Celtics in six games in the 2022 NBA Finals."
+    },
+    {
+        "question": "Who holds the NBA record for the most career three-pointers made?",
+        "options": ["Stephen Curry", "Ray Allen", "Reggie Miller", "James Harden"],
+        "answer": "Stephen Curry",
+        "category": "Basketball",
+        "difficulty": "Medium",
+        "explanation": "Stephen Curry surpassed Ray Allen's record of 2,973 three-pointers in December 2021."
+    },
+    {
+        "question": "Who is the only player in NBA history to score 100 points in a single game?",
+        "options": ["Wilt Chamberlain", "Kobe Bryant", "Michael Jordan", "Elgin Baylor"],
+        "answer": "Wilt Chamberlain",
+        "category": "Basketball",
+        "difficulty": "Hard",
+        "explanation": "Wilt Chamberlain scored 100 points for the Philadelphia Warriors on March 2, 1962."
+    },
+    {
+        "question": "Which NBA franchise has won the most championships in league history?",
+        "options": ["Boston Celtics", "Los Angeles Lakers", "Chicago Bulls", "San Antonio Spurs"],
+        "answer": "Boston Celtics",
+        "category": "Basketball",
+        "difficulty": "Hard",
+        "explanation": "The Boston Celtics won their 18th NBA title in 2024, breaking a tie with the Lakers."
+    },
+    {
         "question": "Which NFL quarterback holds the record for the most Super Bowl wins?",
         "options": ["Tom Brady", "Joe Montana", "John Elway", "Peyton Manning"],
         "answer": "Tom Brady",
-        "category": "NFL History",
+        "category": "Football",
         "difficulty": "Medium",
         "explanation": "Tom Brady holds the record for the most Super Bowl wins with 7 championships."
-    }
-    ,
+    },
     {
         "question": "Which city's NFL team is nicknamed the 'Cheeseheads' by their fans?",
         "options": ["Green Bay (Packers)", "Chicago (Bears)", "Minnesota (Vikings)", "Detroit (Lions)"],
         "answer": "Green Bay (Packers)",
-        "category": "NFL History",
+        "category": "Football",
         "difficulty": "Medium",
         "explanation": "Green Bay is known for the 'Cheeseheads' nickname."
+    },
+    {
+        "question": "How many points is a touchdown worth before the extra point attempt?",
+        "options": ["6", "7", "3", "2"],
+        "answer": "6",
+        "category": "Football",
+        "difficulty": "Easy",
+        "explanation": "A touchdown is worth 6 points before the extra point attempt."
+    },
+    {
+        "question": "What is the championship game of the NFL called?",
+        "options": ["Super Bowl", "Pro Bowl", "NFL Championship", "AFC/NFC Championship"],
+        "answer": "Super Bowl",
+        "category": "Football",
+        "difficulty": "Easy",
+        "explanation": "The Super Bowl is the annual league championship game of the National Football League."
+    },
+    {
+        "question": "Which NFL team is the only franchise to complete a perfect undefeated season including the Super Bowl?",
+        "options": ["1972 Miami Dolphins", "2007 New England Patriots", "1985 Chicago Bears", "1989 San Francisco 49ers"],
+        "answer": "1972 Miami Dolphins",
+        "category": "Football",
+        "difficulty": "Medium",
+        "explanation": "The 1972 Miami Dolphins went 14–0 in the regular season and won all three postseason games to finish 17–0."
+    },
+    {
+        "question": "Who holds the NFL record for the most career rushing yards?",
+        "options": ["Emmitt Smith", "Walter Payton", "Barry Sanders", "Adrian Peterson"],
+        "answer": "Emmitt Smith",
+        "category": "Football",
+        "difficulty": "Hard",
+        "explanation": "Emmitt Smith retired with 18,355 career rushing yards, primarily with the Dallas Cowboys."
+    },
+    {
+        "question": "Which NFL team was originally founded as the Decatur Staleys in 1920?",
+        "options": ["Chicago Bears", "Green Bay Packers", "Detroit Lions", "Arizona Cardinals"],
+        "answer": "Chicago Bears",
+        "category": "Football",
+        "difficulty": "Hard",
+        "explanation": "The franchise moved from Decatur, Illinois to Chicago in 1921 and became the Chicago Bears in 1922."
+    },
+    {
+        "question": "Which country won the 2022 FIFA World Cup?",
+        "options": ["Argentina", "France", "Brazil", "Croatia"],
+        "answer": "Argentina",
+        "category": "Soccer",
+        "difficulty": "Easy",
+        "explanation": "Argentina defeated France on penalties in the 2022 FIFA World Cup final in Qatar."
+    },
+    {
+        "question": "How long is a standard regulation soccer match before stoppage time?",
+        "options": ["90 minutes", "80 minutes", "60 minutes", "100 minutes"],
+        "answer": "90 minutes",
+        "category": "Soccer",
+        "difficulty": "Easy",
+        "explanation": "A standard soccer match consists of two 45-minute halves for a total of 90 minutes."
+    },
+    {
+        "question": "Which player has won the most Ballon d'Or awards in history?",
+        "options": ["Lionel Messi", "Cristiano Ronaldo", "Michel Platini", "Johan Cruyff"],
+        "answer": "Lionel Messi",
+        "category": "Soccer",
+        "difficulty": "Medium",
+        "explanation": "Lionel Messi has won the Ballon d'Or eight times, the most of any player."
+    },
+    {
+        "question": "Which country has won the most men's FIFA World Cup titles?",
+        "options": ["Brazil", "Germany", "Italy", "Argentina"],
+        "answer": "Brazil",
+        "category": "Soccer",
+        "difficulty": "Medium",
+        "explanation": "Brazil has won the men's FIFA World Cup five times (1958, 1962, 1970, 1994, and 2002)."
+    },
+    {
+        "question": "Which club won the first-ever Premier League title in the 1992–93 season?",
+        "options": ["Manchester United", "Arsenal", "Blackburn Rovers", "Liverpool"],
+        "answer": "Manchester United",
+        "category": "Soccer",
+        "difficulty": "Hard",
+        "explanation": "Managed by Alex Ferguson, Manchester United won the inaugural 1992–93 Premier League season."
+    },
+    {
+        "question": "Who scored the fastest hat-trick in Premier League history (2 minutes, 56 seconds)?",
+        "options": ["Sadio Mane", "Robbie Fowler", "Sergio Aguero", "Mohamed Salah"],
+        "answer": "Sadio Mane",
+        "category": "Soccer",
+        "difficulty": "Hard",
+        "explanation": "Sadio Mane scored three goals in 2 minutes and 56 seconds for Southampton against Aston Villa in 2015."
+    },
+    {
+        "question": "How many strikes does it take for a batter to strike out in baseball?",
+        "options": ["3", "4", "2", "5"],
+        "answer": "3",
+        "category": "Baseball",
+        "difficulty": "Easy",
+        "explanation": "Three strikes result in an out, whereas four balls result in a walk."
+    },
+    {
+        "question": "How many innings are in a standard Major League Baseball game?",
+        "options": ["9", "7", "8", "10"],
+        "answer": "9",
+        "category": "Baseball",
+        "difficulty": "Easy",
+        "explanation": "Regulation MLB games consist of 9 innings unless tied, which triggers extra innings."
+    },
+    {
+        "question": "Who broke Babe Ruth's single-season home run record by hitting 61 home runs in 1961?",
+        "options": ["Roger Maris", "Mickey Mantle", "Hank Aaron", "Willie Mays"],
+        "answer": "Roger Maris",
+        "category": "Baseball",
+        "difficulty": "Medium",
+        "explanation": "New York Yankees outfielder Roger Maris hit 61 home runs in 1961 to surpass Babe Ruth's 60."
+    },
+    {
+        "question": "Which MLB pitcher holds the all-time career record for strikeouts?",
+        "options": ["Nolan Ryan", "Randy Johnson", "Roger Clemens", "Pedro Martinez"],
+        "answer": "Nolan Ryan",
+        "category": "Baseball",
+        "difficulty": "Medium",
+        "explanation": "Nolan Ryan recorded 5,714 career strikeouts across his 27-season MLB career."
+    },
+    {
+        "question": "Who was the first MLB player to reach 50 home runs and 50 stolen bases in a single season?",
+        "options": ["Shohei Ohtani", "Barry Bonds", "Alex Rodriguez", "Ronald Acuna Jr."],
+        "answer": "Shohei Ohtani",
+        "category": "Baseball",
+        "difficulty": "Hard",
+        "explanation": "Shohei Ohtani founded the 50–50 club with the Los Angeles Dodgers during the 2024 MLB season."
+    },
+    {
+        "question": "Which pitcher threw the only perfect game in World Series history?",
+        "options": ["Don Larsen", "Sandy Koufax", "Bob Gibson", "Mariano Rivera"],
+        "answer": "Don Larsen",
+        "category": "Baseball",
+        "difficulty": "Hard",
+        "explanation": "New York Yankees pitcher Don Larsen threw a perfect game in Game 5 of the 1956 World Series."
     }
 ]
