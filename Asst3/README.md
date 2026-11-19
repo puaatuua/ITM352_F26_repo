@@ -73,6 +73,7 @@ python3 quiz_webapp.py
 
 ```markdown
 ## Using the Quiz
+```
 
 1. Open the home page.
 2. Select a sports category and difficulty.
@@ -97,10 +98,17 @@ Retrieve questions:
 GET /api/questions
 GET /api/questions?category=Basketball
 GET /api/questions?difficulty=Medium
+```
 
 Retrieve scores:
+
+```text
 GET /api/scores
+```
 
 Store a score:
+
+```text
 POST /api/scores
 Content-Type: applicaiton/json
+```
