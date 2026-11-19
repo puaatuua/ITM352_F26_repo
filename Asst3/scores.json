@@ -1,0 +1,28 @@
+[
+  {
+    "timestamp": "2026-11-18T19:09:33.240565",
+    "category": "Football",
+    "difficulty": "Medium",
+    "score": 4,
+    "total": 6,
+    "category_scores": {
+      "Football": 4
+    },
+    "category_totals": {
+      "Football": 6
+    }
+  },
+  {
+    "timestamp": "2026-11-18T19:09:47.023438",
+    "category": "Soccer",
+    "difficulty": "Easy",
+    "score": 1,
+    "total": 2,
+    "category_scores": {
+      "Soccer": 1
+    },
+    "category_totals": {
+      "Soccer": 2
+    }
+  }
+]

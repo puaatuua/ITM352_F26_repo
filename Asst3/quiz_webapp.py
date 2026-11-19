@@ -3,17 +3,23 @@
 # Date: Nov. 16, 2026
 
 from flask import Flask, render_template, request, redirect, url_for, session
+from datetime import datetime
+from pathlib import Path
 import json
 import random
 
 app = Flask(__name__)
 app.secret_key = 'key123'
 
+SCORE_FILE = Path(app.root_path) / "scores.json"
+
 DIFFICULTY_POINTS = {
     "Easy": 1,
     "Medium": 2,
     "Hard": 3
 }
+
+
 
 def load_questions(filepath='questions.json'):
     # Load questions from the questions.json file
@@ -24,6 +30,8 @@ def load_questions(filepath='questions.json'):
     except FileNotFoundError:
         print(f"Error: {filepath} not found.")
         return {}
+
+
 
 def prepare_questions(all_questions, category="All", difficulty="Easy"):
     # Filter questions based on category and difficulty
@@ -47,9 +55,32 @@ def prepare_questions(all_questions, category="All", difficulty="Easy"):
 
     return quiz_questions
 
+
+
+def load_scores():
+    if not SCORE_FILE.exists():
+        return []
+
+    try:
+        with open(SCORE_FILE, "r", encoding="utf-8") as file:
+            content = file.read()
+
+            if not content.strip():
+                return []
+
+            return json.loads(content)
+
+    except json.JSONDecodeError:
+        print(f"Error: {SCORE_FILE} contains invalid JSON.")
+        return []
+
+
+
 @app.route("/")
 def home():
     return render_template("index.html")
+
+
 
 @app.route("/setup", methods=["GET", "POST"])
 def setup():
@@ -97,6 +128,7 @@ def setup():
 
         session["category"] = category
         session["difficulty"] = difficulty
+        session["score_saved"] = False  # Initialize the score saved flag
 
         return redirect(url_for("quiz")) # Redirect to the quiz page after setting up the session
 
@@ -105,6 +137,8 @@ def setup():
         categories=categories,
         difficulties=["Easy", "Medium", "Hard"]
     )
+
+
 
 @app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
@@ -167,6 +201,8 @@ def quiz():
         question=session['question']
     )
 
+
+
 @app.route("/result")
 def result():
     # Read values from the session to display the final results
@@ -174,6 +210,26 @@ def result():
     total = session.get("difficulty_total", 0)
     category_scores = session.get("category_scores", {})
     category_totals = session.get("category_totals", {})
+
+    if not session.get("score_saved", False):
+        # Load existing scores from the scores.json file
+        scores = load_scores()
+
+        # Append the new score with timestamp
+        scores.append({
+            "timestamp": datetime.now().isoformat(),
+            "category": session.get("category"),
+            "difficulty": session.get("difficulty"),
+            "score": score,
+            "total": total,
+            "category_scores": category_scores,
+            "category_totals": category_totals
+        })
+
+        with open(SCORE_FILE, 'w', encoding="utf-8") as file:
+            json.dump(scores, file, indent=2)
+
+        session["score_saved"] = True  # Mark the score as saved to prevent duplicates
 
     # Pass the values to Jinja
     return render_template(
@@ -183,6 +239,8 @@ def result():
         category_scores=category_scores,
         category_totals=category_totals
     )
+
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5050) # Use port 5050 to avoid conflicts with other applications
