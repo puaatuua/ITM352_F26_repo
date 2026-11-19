@@ -37,3 +37,62 @@ Asst3/
     ├── quiz.html
     ├── question_result.html
     └── result.html
+
+## Setup Instructions
+
+1. Open a terminal and enter the project folder:
+
+```bash
+cd Asst3
+
+2. Create and activate a virtual environment:
+
+python3 -m venv .venv
+source .venv/bin/activate
+
+3. Install Flask and pytest:
+
+python3 -m pip install flask pytest
+
+4. Start the server:
+
+python3 quiz_webapp.py
+
+5. Open http://127.0.0.1:5050/
+
+
+## Usage
+
+```markdown
+## Using the Quiz
+
+1. Open the home page.
+2. Select a sports category and difficulty.
+3. Choose an answer and submit it.
+4. Review the immediate feedback and explanation.
+5. Continue through the remaining questions.
+6. Review overall and category scores on the results page.
+
+## Scoring
+
+- Easy question: 1 point
+- Medium question: 2 points
+- Hard question: 3 points
+
+Category totals use the same difficulty-point system.
+
+## REST API
+
+Retrieve questions:
+
+```text
+GET /api/questions
+GET /api/questions?category=Basketball
+GET /api/questions?difficulty=Medium
+
+Retrieve scores:
+GET /api/scores
+
+Store a score:
+POST /api/scores
+Content-Type: applicaiton/json

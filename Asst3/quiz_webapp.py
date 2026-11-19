@@ -3,6 +3,7 @@
 # Date: Nov. 16, 2026
 
 from flask import Flask, render_template, request, redirect, url_for, session
+from flask import jsonify
 from datetime import datetime
 from pathlib import Path
 import json
@@ -239,6 +240,79 @@ def result():
         category_scores=category_scores,
         category_totals=category_totals
     )
+
+
+
+@app.route("/api/questions", methods=["GET"])
+def api_questions():
+    questions = load_questions()
+
+    category = request.args.get("category")
+    difficulty = request.args.get("difficulty")
+
+    if category:
+        questions = [
+            question for question in questions
+            if question["category"].lower() == category.lower()
+        ]
+
+    if difficulty:
+        questions = [
+            question for question in questions
+            if question["difficulty"].lower() == difficulty.lower()
+        ]
+
+    public_questions = [
+        {
+            "question": question["question"],
+            "options": question["options"],
+            "category": question["category"],
+            "difficulty": question["difficulty"]
+        }
+        for question in questions
+    ]
+
+    return jsonify(public_questions)
+
+
+
+@app.route("/api/scores", methods=["GET"])
+def api_get_scores():
+    return jsonify(load_scores())
+
+
+@app.route("/api/scores", methods=["POST"])
+def api_store_score():
+    data = request.get_json(silent=True)
+
+    if not data:
+        return jsonify({"error": "JSON data is required"}), 400
+
+    score = data.get("score")
+    total = data.get("total")
+
+    if not isinstance(score, int) or not isinstance(total, int):
+        return jsonify({
+            "error": "score and total must be integers"
+        }), 400
+
+    if total < 1 or score < 0 or score > total:
+        return jsonify({"error": "Invalid score"}), 400
+
+    scores = load_scores()
+
+    entry = {
+        "timestamp": datetime.now().isoformat(),
+        "score": score,
+        "total": total
+    }
+
+    scores.append(entry)
+
+    with open(SCORE_FILE, "w", encoding="utf-8") as file:
+        json.dump(scores, file, indent=2)
+
+    return jsonify(entry), 201
 
 
 

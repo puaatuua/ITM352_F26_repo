@@ -24,5 +24,46 @@
     "category_totals": {
       "Soccer": 2
     }
+  },
+  {
+    "timestamp": "2026-11-18T19:15:23.675714",
+    "category": "Basketball",
+    "difficulty": "Easy",
+    "score": 1,
+    "total": 1,
+    "category_scores": {
+      "Basketball": 1
+    },
+    "category_totals": {
+      "Basketball": 1
+    }
+  },
+  {
+    "timestamp": "2026-11-18T19:17:46.881495",
+    "score": 8,
+    "total": 10
+  },
+  {
+    "timestamp": "2026-11-18T21:13:11.425923",
+    "category": "Baseball",
+    "difficulty": "Medium",
+    "score": 0,
+    "total": 4,
+    "category_scores": {
+      "Baseball": 0
+    },
+    "category_totals": {
+      "Baseball": 4
+    }
+  },
+  {
+    "timestamp": "2026-11-18T21:32:44.564553",
+    "score": 8,
+    "total": 10
+  },
+  {
+    "timestamp": "2026-11-18T21:37:04.831143",
+    "score": 8,
+    "total": 10
   }
 ]
