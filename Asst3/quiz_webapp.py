@@ -20,7 +20,7 @@ def load_questions(filepath='questions.json'):
     try:
         with open(filepath, 'r') as file:
             return json.load(file)
-    # Handle the case where the file is not found    
+    # Handle the case where the json file is not found    
     except FileNotFoundError:
         print(f"Error: {filepath} not found.")
         return {}
@@ -60,10 +60,12 @@ def setup():
         for question in all_questions
     })
 
+    # Handle form submission
     if request.method == "POST":
         category = request.form["category"]
         difficulty = request.form["difficulty"]
 
+        # Filter questions based on selected category and difficulty
         filtered_questions = [
             question for question in all_questions
             if question["category"].lower() == category.lower()
@@ -73,15 +75,13 @@ def setup():
         if not filtered_questions:
             return "No questions matched these options.", 400
 
-        random.shuffle(filtered_questions)
+        random.shuffle(filtered_questions) # Shuffle the filtered questions
 
-        session["questions"] = filtered_questions
-        session["question_index"] = 0
-        session["score"] = 0
+        session["questions"] = filtered_questions # Store the filtered questions in the session
+        session["question_index"] = 0 # Track the current question index
+        session["score"] = 0 # Initialize the score to 0
 
-        session["category_scores"] = {
-            category: 0
-        }
+        session["category_scores"] = {category: 0}
 
         session["category_totals"] = {
             category: sum(
@@ -98,7 +98,7 @@ def setup():
         session["category"] = category
         session["difficulty"] = difficulty
 
-        return redirect(url_for("quiz"))
+        return redirect(url_for("quiz")) # Redirect to the quiz page after setting up the session
 
     return render_template(
         "setup.html",
@@ -108,28 +108,31 @@ def setup():
 
 @app.route('/quiz', methods=['GET', 'POST'])
 def quiz():
+    # Handle POST request when the user submits an answer
     if request.method == 'POST':
+        # Retrieve the previously displayed question from the session
         question = session.get('question')
-
         user_answer = request.form.get('answer')
         correct = user_answer == question['answer']
 
         if correct:
             points = DIFFICULTY_POINTS[question['difficulty']]
 
+            # Update the overall score
             session["score"] = session.get("score", 0) + points
 
             category = question['category']
+            # Update the category scores
             category_scores = session.get("category_scores", {})
             category_scores[category] = category_scores.get(category, 0) + points
             session["category_scores"] = category_scores
 
-        session['question_index'] = session.get('question_index', 0) + 1
+        session['question_index'] = session.get('question_index', 0) + 1 # Advance the question index
         is_finished = session['question_index'] >= len(session['questions'])
-
+        # If the quiz is finished, redirect to the result page
         if is_finished:
             return redirect(url_for('result'))
-
+        # Otherwise, set the next question in the session
         session['question'] = session['questions'][session['question_index']]
 
         return render_template(
@@ -140,6 +143,7 @@ def quiz():
             explanation=question['explanation']
         )
 
+    # Handle GET request when the user accesses the quiz page
     if 'questions' not in session:
         all_questions = load_questions()
         session['questions'] = prepare_questions(
@@ -150,7 +154,7 @@ def quiz():
         session['question_index'] = 0
         session['score'] = 0
 
-    question_index = session['question_index']
+    question_index = session['question_index'] # Get the current question index from the session
     questions = session['questions']
 
     if question_index >= len(questions):
@@ -165,11 +169,13 @@ def quiz():
 
 @app.route("/result")
 def result():
+    # Read values from the session to display the final results
     score = session.get("score", 0)
     total = session.get("difficulty_total", 0)
     category_scores = session.get("category_scores", {})
     category_totals = session.get("category_totals", {})
 
+    # Pass the values to Jinja
     return render_template(
         "result.html",
         score=score,
@@ -179,4 +185,4 @@ def result():
     )
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5050)
+    app.run(debug=True, port=5050) # Use port 5050 to avoid conflicts with other applications
