@@ -15,8 +15,11 @@ results = client.get(json_file, limit=500)
 # Convert to pandas DataFrame
 results_df = pd.DataFrame.from_records(results)
 results_df.head()
+#results_df.info()
 
-vehicles = results_df[["public_vehicle_number", "vehicle_fuel_sorce",]]
+vehicles = results_df[["public_vehicle_number", "vehicle_fuel_source",]]
 print("Public vehicles and fuel sources: ")
 
-vehicles.head()
+vehicles.info()
+vehicles_by_fuel = vehicles.groupby("vehicle_fuel_source").count()
+print(vehicles_by_fuel)
