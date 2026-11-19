@@ -71,9 +71,7 @@ python3 quiz_webapp.py
 
 ## Usage
 
-```markdown
 ## Using the Quiz
-```
 
 1. Open the home page.
 2. Select a sports category and difficulty.
